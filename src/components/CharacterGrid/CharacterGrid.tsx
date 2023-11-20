@@ -25,7 +25,7 @@ const CharacterGrid = ({ selectedEpisode }: Props) => {
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         spacing={6}
         marginRight="1.5%"
-        marginLeft="-2%"
+        marginLeft="-24%"
       >
         {isLoading &&
           skeletons.map((skeleton) => (

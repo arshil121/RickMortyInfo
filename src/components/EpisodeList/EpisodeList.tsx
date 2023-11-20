@@ -5,20 +5,19 @@ interface Props {
   onSelectEpisode: (episodes: Episodes) => void;
 }
 
-const EpisodeList = ({onSelectEpisode}: Props) => {
+const EpisodeList = ({ onSelectEpisode }: Props) => {
   const { data } = useEpisode();
 
   return (
     <div>
       {data.map((episode) => (
-        <div key={episode.id} style={{ marginBottom: "10px", width: "70%" }}>
+        <div key={episode.id} style={{ marginBottom: "10px" }} >
           <Button
             onClick={() => onSelectEpisode(episode)}
             variant="outline"
-            width="100%"
             fontSize="sm"
           >
-            <span>{episode.episode}</span>
+            {episode.episode}
           </Button>
         </div>
       ))}

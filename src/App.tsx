@@ -17,7 +17,7 @@ const App = () => {
         templateColumns={
           {
             base: '1fr',
-            lg: '10 % 1fr'
+            lg: '475px  1fr'
           }
         }
       >
