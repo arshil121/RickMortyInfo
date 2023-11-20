@@ -1,4 +1,4 @@
-import { Card, CardBody, Flex, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
 import { Character } from "../../hooks/useCharacter/useCharacter";
 import OriginInfo from "../OriginInfo/OriginInfo";
 import LocationInfo from "../LocationInfo/LocationInfo";
@@ -10,15 +10,12 @@ interface Props {
 
 const CharacterCard = ({ character }: Props) => {
   return (
-    <Card >
+    <Card borderRadius={10} overflow="hidden">
       <Image src={character.image} />
       <CardBody>
         <Heading fontSize="2xl">{character.name}</Heading>
-        <Flex>
-          <StatusInfo character={character} />
-          <OriginInfo character={character} />
-        </Flex>
-        <br />
+        <StatusInfo character={character} />
+        <OriginInfo character={character} />
         <LocationInfo character={character} />
       </CardBody>
     </Card>
