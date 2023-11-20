@@ -2,6 +2,7 @@ import { SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
 import useCharacters from "../../hooks/useCharacter/useCharacter";
 import CharacterCard from "../CharacterCard/CharacterCard";
 import CharacterCardSkeleton from "../CharacterCardSkeleton/CharacterCardSkeleton";
+import CharacterCardContainer from "../CharacterCardContainer/CharacterCardContainer";
 
 const CharacterGrid = () => {
   const { characters, error, isLoading } = useCharacters();
@@ -21,10 +22,16 @@ const CharacterGrid = () => {
         spacing={10}
       >
         {isLoading &&
-          skeletons.map((skeleton) => <CharacterCardSkeleton key={skeleton} />)}
-          
+          skeletons.map((skeleton) => (
+            <CharacterCardContainer key={skeleton}>
+              <CharacterCardSkeleton />
+            </CharacterCardContainer>
+          ))}
+
         {characters.map((character) => (
-          <CharacterCard key={character.id} character={character} />
+          <CharacterCardContainer key={character.id}>
+            <CharacterCard character={character} />
+          </CharacterCardContainer>
         ))}
       </SimpleGrid>
     </>

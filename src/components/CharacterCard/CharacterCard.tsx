@@ -10,7 +10,7 @@ interface Props {
 
 const CharacterCard = ({ character }: Props) => {
   return (
-    <Card width="400px" borderRadius={10} overflow="hidden">
+    <Card >
       <Image src={character.image} />
       <CardBody>
         <Heading fontSize="2xl">{character.name}</Heading>
