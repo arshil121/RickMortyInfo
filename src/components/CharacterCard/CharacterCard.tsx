@@ -8,9 +8,9 @@ interface Props {
   character: Character;
 }
 
-const CharacterCard: React.FC<Props> = ({ character }) => {
+const CharacterCard = ({ character }: Props) => {
   return (
-    <Card borderRadius={10} overflow="hidden">
+    <Card width="400px" borderRadius={10} overflow="hidden">
       <Image src={character.image} />
       <CardBody>
         <Heading fontSize="2xl">{character.name}</Heading>

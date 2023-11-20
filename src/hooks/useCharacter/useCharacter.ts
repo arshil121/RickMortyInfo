@@ -19,7 +19,6 @@ export interface Character {
   };
 }
 
-
 interface FetchCharacterResponse {
   count: number;
   results: Character[];
@@ -28,21 +27,27 @@ interface FetchCharacterResponse {
 const useCharacters = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
+    setLoading(true);
     apiClient
       .get<FetchCharacterResponse>("/character", { signal: controller.signal })
-      .then((res) => setCharacters(res.data.results))
+      .then((res) => {
+        setCharacters(res.data.results);
+        setLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoading(false);
       });
 
     return () => controller.abort();
   }, []);
 
-  return { characters, error };
+  return { characters, error, isLoading };
 };
 
 export default useCharacters;
