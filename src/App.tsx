@@ -4,6 +4,7 @@ import CharacterGrid from "./components/CharacterGrid/CharacterGrid";
 import EpisodeList from "./components/EpisodeList/EpisodeList";
 import { Episodes } from "./hooks/useEpisode/useEpisode";
 import { useState } from "react";
+import StatusSelector from "./components/StatusSelector/StatusSelector";
 
 const App = () => {
   const [selectedEpisode, setSelectedEpisode] = useState<Episodes | null>(null);
@@ -14,12 +15,10 @@ const App = () => {
           base: `"nav" "main"`,
           lg: `"nav nav" "aside main"`,
         }}
-        templateColumns={
-          {
-            base: '1fr',
-            lg: '475px  1fr'
-          }
-        }
+        templateColumns={{
+          base: "1fr",
+          lg: "150px  1fr",
+        }}
       >
         <GridItem area="nav">
           <NavBar />
@@ -27,12 +26,15 @@ const App = () => {
 
         <Show above="lg">
           <GridItem area="aside" padding={5}>
-            <EpisodeList onSelectEpisode={(episode) => setSelectedEpisode(episode)}/>
+            <EpisodeList
+              onSelectEpisode={(episode) => setSelectedEpisode(episode)}
+            />
           </GridItem>
         </Show>
 
         <GridItem area="main">
-        <CharacterGrid selectedEpisode={selectedEpisode} />
+          <StatusSelector />
+          <CharacterGrid selectedEpisode={selectedEpisode} />
         </GridItem>
       </Grid>
     </>

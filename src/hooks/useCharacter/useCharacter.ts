@@ -18,6 +18,12 @@ export interface Character {
   url: string;
 }
 
-const useCharacters = () => useData<Character>("/character");
+const useCharacters = (pageNumber: number) => {
+  const { data, error, isLoading } = useData<Character>(
+    `/character/?page=${pageNumber}`
+  );
+
+  return { data, error, isLoading };
+};
 
 export default useCharacters;
