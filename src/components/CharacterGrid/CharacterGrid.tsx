@@ -1,24 +1,31 @@
-import { SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import useCharacters from "../../hooks/useCharacter/useCharacter";
 import CharacterCard from "../CharacterCard/CharacterCard";
 import CharacterCardSkeleton from "../CharacterCardSkeleton/CharacterCardSkeleton";
 import CharacterCardContainer from "../CharacterCardContainer/CharacterCardContainer";
+import { Episodes } from "../../hooks/useEpisode/useEpisode";
 
-const CharacterGrid = () => {
-  const { characters, error, isLoading } = useCharacters();
+interface Props {
+  selectedEpisode: Episodes | null;
+}
+
+const CharacterGrid = ({ selectedEpisode }: Props) => {
+  const { data, error, isLoading } = useCharacters();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+  
 
-  // // Filtering characters that are not female
-  // const filteredCharacters = characters.filter(
-  //   (character) => character.gender !== "Female"
-  // );
+  const filteredCharacters = selectedEpisode
+    ? data.filter((character) => selectedEpisode.characters.includes(character.url))
+    : data;
 
   return (
     <>
       {error && <Text>{error}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        spacing={10}
+        spacing={6}
+        marginRight="1.5%"
+        marginLeft="-2%"
       >
         {isLoading &&
           skeletons.map((skeleton) => (
@@ -27,7 +34,7 @@ const CharacterGrid = () => {
             </CharacterCardContainer>
           ))}
 
-        {characters.map((character) => (
+        {filteredCharacters.map((character) => ( 
           <CharacterCardContainer key={character.id}>
             <CharacterCard character={character} />
           </CharacterCardContainer>

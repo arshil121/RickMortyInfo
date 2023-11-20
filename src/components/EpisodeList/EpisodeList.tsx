@@ -1,24 +1,28 @@
-import React from "react";
-import useEpisode from "../../hooks/useEpisode/useEpisode";
+import { Button } from "@chakra-ui/react";
+import useEpisode, { Episodes } from "../../hooks/useEpisode/useEpisode";
 
-const EpisodeList = () => {
-  const { episodes } = useEpisode();
+interface Props {
+  onSelectEpisode: (episodes: Episodes) => void;
+}
 
-  const episodeNameStyle = {
-    borderBottom: "1px solid #000", // Add a border between name and episode
-    paddingBottom: "4px", // Adjust spacing if needed
-    marginBottom: "4px", // Adjust spacing if needed
-  };
+const EpisodeList = ({onSelectEpisode}: Props) => {
+  const { data } = useEpisode();
 
   return (
-    <ul>
-      {episodes.map((episode) => (
-        <li key={episode.id}>
-          <div >{episode.name}</div>
-          <div style={episodeNameStyle}>{episode.episode}</div>
-        </li>
+    <div>
+      {data.map((episode) => (
+        <div key={episode.id} style={{ marginBottom: "10px", width: "70%" }}>
+          <Button
+            onClick={() => onSelectEpisode(episode)}
+            variant="outline"
+            width="100%"
+            fontSize="sm"
+          >
+            <span>{episode.episode}</span>
+          </Button>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
